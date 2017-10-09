@@ -1,0 +1,4 @@
+*.md
+README-secret.md
+!README*.md
+docker-compose.yml
