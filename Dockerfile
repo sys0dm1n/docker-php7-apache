@@ -16,7 +16,7 @@ ENV APACHE_RUN_USER='www-data' \
     APACHE_LOG_DIR='/var/log/apache2'
 
 # Apache enable mod_rewrite and headers
-RUN a2enmod rewrite headers
+RUN a2enmod rewrite headers ssl
 
 # Install dependencies
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y -qq\
@@ -77,6 +77,12 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 # Changing DocumentRoot
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+# Create selfsigned certificate
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/ssl-cert-snakeoil.key -out /etc/ssl/certs/ssl-cert-snakeoil.pem -subj "/C=AT/ST=Paris/L=Paris/O=Security/OU=Development/CN=example.com"
+
+# Enable https virtualhost
+RUN a2ensite default-ssl
 
 # Clean up APT and temporary files when done
 RUN apt-get clean -qq && \
