@@ -1,6 +1,6 @@
 FROM php:7.0-apache
 
-LABEL maintainer="alain.chemaly@keeward.com" \
+LABEL maintainer="sys0dm1n" \
       description="Wordpress Container"
 
 ENV APACHE_RUN_USER='www-data' \
