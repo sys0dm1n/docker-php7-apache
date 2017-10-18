@@ -66,7 +66,7 @@ ENV LC_ALL=C.UTF-8
 ENV locale-gen=en_US.UTF-8
 
 # Allow the use of .htaccess
-RUN sed -ri -e 's!^AllowOverride None!AllowOverride All!g' /etc/apache2/apache2.conf
+RUN sed -ri -e 's!AllowOverride None!AllowOverride All!g' /etc/apache2/apache2.conf
 
 #COPY website.conf /etc/apache2/sites-available/
 #COPY php.ini /usr/local/etc/php/conf.d/
