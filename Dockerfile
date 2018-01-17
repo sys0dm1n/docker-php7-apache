@@ -42,7 +42,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y -qq\
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install -j$(nproc) iconv mcrypt \
     && docker-php-ext-configure gd --with-png-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) gd mysqli mbstring zip
+    && docker-php-ext-install -j$(nproc) gd mysqli mbstring zip gettext
 
 
 #Install and enable xdebug
